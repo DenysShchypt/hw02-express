@@ -1,7 +1,7 @@
 // new project Denys d2KR7fvS9hQhV2nU
 
 const mongoose=require("mongoose");
-const DB_HOST="mongodb+srv://Denys:d2KR7fvS9hQhV2nU@cluster0.vj6xgqm.mongodb.net/db-contacts"
+const {DB_HOST}=require("./config")
 
 const app = require('./app');
 
