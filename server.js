@@ -1,5 +1,15 @@
-const app = require('./app')
+// new project Denys d2KR7fvS9hQhV2nU
 
-app.listen(3000, () => {
-  console.log("Server running. Use our API on port: 3000")
-})
+const mongoose=require("mongoose");
+const DB_HOST="mongodb+srv://Denys:d2KR7fvS9hQhV2nU@cluster0.vj6xgqm.mongodb.net/db-contacts"
+
+const app = require('./app');
+
+mongoose.connect(DB_HOST).then(app.listen(3000, () => {
+  console.log("Database connection successful")
+})).catch(error=>{
+  console.log(error.message);
+  process.exit(1);
+});
+
+
