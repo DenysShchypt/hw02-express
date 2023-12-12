@@ -1,10 +1,13 @@
 const fs = require('fs/promises');
+const Contact = require('../models/contact');
 const { randomUUID } = require('crypto');
 const path = require('path');
 const contactsPath = path.join(__dirname, "./contacts.json");
-
+console.log(Contact);
 const listContacts = async () => {
-  const buffer = await fs.readFile(contactsPath);
+  const result = await Contact.find();
+  console.log(result);
+  const buffer = await fs.readFile(result);
   return JSON.parse(buffer);
 };
 
