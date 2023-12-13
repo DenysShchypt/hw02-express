@@ -1,14 +1,9 @@
 
 const mongoose = require("mongoose");
 const app = require('./app');
-// const {DB_HOST, PORT = 3000}=process.env;
-// const {Contact}=require('./models/contact')
-// mongoose.set("strictQuery", true);
-const DB_HOST="mongodb+srv://Denys:rqwslprF0ZWrAgdF@cluster0.mstgf4x.mongodb.net/db-contacts?retryWrites=true&w=majority"
+const {DB_HOST, PORT = 3000}=process.env;
 
-mongoose.connect(DB_HOST).then(app.listen(3000, () => {
-  // const result = Contact.find();
-  // console.log(result);
+mongoose.connect(DB_HOST).then(app.listen(PORT, () => {
 
   console.log("Database connection successful")
 })).catch(error => {
