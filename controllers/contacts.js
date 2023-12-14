@@ -4,13 +4,15 @@ const {
 const {Contact} = require('../models/contact');
 
 const getAll = async (req, res) => {
-  const result = await Contact.find({},"-createdAt -updatedAt");
+  const result = await Contact.find({}
+    // ,"-createdAt -updatedAt"
+    );
   res.json(result);
 };
 
 const getById = async (req, res) => {
-  const { id } = req.params
-  const result = await Contact.findById(id)
+  const { contactId } = req.params
+  const result = await Contact.findById(contactId)
   if (!result) {
     throw HttpError(404, "Not found")
   }
@@ -24,7 +26,7 @@ const addContact = async (req, res) => {
 
 const removeContact = async (req, res) => {
   const { contactId } = req.params
-  const result = await Contact.findOneAndDelete(contactId)
+  const result = await Contact.findOneAndRemove(contactId)
   if (!result) {
     throw HttpError(404, "Not found")
   };
@@ -37,8 +39,10 @@ const updateContact = async (req, res) => {
   if (!result) {
     throw HttpError(404, "Not found")
   };
-  res.json(result);
+  res.status(result).json({ message: "UpdateContact success" })
+
 };
+
 const updateFavorite = async (req, res) => {
   const { contactId } = req.params;
   if (!req.body) {

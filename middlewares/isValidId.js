@@ -3,9 +3,9 @@ const {HttpError}=require("../helpers")
 // Мідлваре для перевірки id
 
  const isValidId = (req,res,next) => {
-const{id} = req.params;
-if (!isValidObjectId(id)) {
-    next(HttpError(400, `${id} is not valid id`))
+const{contactId} = req.params;
+if (!isValidObjectId(contactId)) {
+    next(HttpError(400, `${contactId} is not valid id`))
 }
 next()
 };
