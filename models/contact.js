@@ -19,6 +19,7 @@ const contactSchema = new Schema({
     default: false,
   },
 }
+// Дата створення і дата оновлення
   , { versionKey: false, timestamps: true }
 );
 
@@ -37,7 +38,7 @@ const addSchema = Joi.object({
 const updatePatchSchema = Joi.object({
   favorite: Joi.boolean().required()
 });
-
+// Створюємо модель (Клас який працює з колекцією)
 const Contact = model("contact", contactSchema);
 
 module.exports = {
