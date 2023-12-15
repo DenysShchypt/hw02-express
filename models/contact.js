@@ -31,7 +31,7 @@ const addSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
   phone: Joi.string().required(),
-  favorite: Joi.boolean().required().messages({'any.required': `missing field favorite` })
+  favorite: Joi.boolean().required()
 });
 
 // Схема обробки PATCH запиту
