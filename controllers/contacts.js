@@ -4,8 +4,9 @@ const {
 const { Contact } = require('../models/contact');
 
 const getAll = async (req, res) => {
-  const result = await Contact.find({}
-    , "-createdAt -updatedAt"
+  const result = await Contact.find({},
+    // Виключення полів які не треба повертати через "-"
+    "-createdAt -updatedAt"
   );
   res.json(result);
 };
@@ -35,7 +36,9 @@ const removeContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndUpdate(contactId, req.body, { new: true });
+  const result = await Contact.findByIdAndUpdate(contactId, req.body,
+    // Третій аргумент для повернення оновленого об'єкту
+    { new: true });
   if (!result) {
     throw HttpError(404, "Not found")
   };
@@ -46,7 +49,7 @@ const updateFavorite = async (req, res) => {
   const { contactId } = req.params;
   const isFavorite = "favorite" in req.body;
   if (!isFavorite) {
-    return res.json(400, { message: "missing field favorite" });
+    throw HttpError(400, { message: "missing field favorite" });
   }
   const result = await Contact.findByIdAndUpdate(contactId, req.body, { new: true });
   if (!result) {

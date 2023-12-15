@@ -23,7 +23,7 @@ const contactSchema = new Schema({
   , { versionKey: false, timestamps: true }
 );
 
-// Обробка помилки з невірним записом
+// Обробка помилки з невірним записом status
 contactSchema.post("save", handleMongooseError);
 
 // Схема того що нам приходить з POST або PUT
@@ -31,7 +31,7 @@ const addSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
   phone: Joi.string().required(),
-  favorite: Joi.boolean().required()
+  favorite: Joi.boolean().required().messages({'any.required': `missing field favorite` })
 });
 
 // Схема обробки PATCH запиту
