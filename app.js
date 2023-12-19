@@ -4,7 +4,9 @@ const cors = require('cors');
 
 // Додавання данних з env змінні оточення process.env
 require("dotenv").config();
+// Додавання маршрутів
 const contactsRouter = require('./routes/api/contacts');
+const authRouter = require("./routes/api/users")
 
 const app = express();
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
@@ -13,15 +15,19 @@ app.use(logger(formatsLogger));
 // Мідлваре для обмеження доступу на сайт( передається список адрес)
 app.use(cors());
 app.use(express.json());
+
+// Обробка запитів на api за допомогою маршрутів
+app.use("/api/users", authRouter);
 app.use('/api/contacts', contactsRouter);
+
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' })
 });
 
 app.use((err, req, res, next) => {
-  const{status=500,message="Server error"}=err;
-  res.status(status).json({ message});
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
 });
 
 module.exports = app;
