@@ -18,8 +18,13 @@ const contactSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
+  }
 }
-// Дата створення і дата оновлення
+  // Дата створення і дата оновлення
   , { versionKey: false, timestamps: true }
 );
 
