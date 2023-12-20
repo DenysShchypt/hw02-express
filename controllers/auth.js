@@ -1,10 +1,14 @@
 const bcrypt = require("bcrypt");
+const gravatar=require("gravatar");
+const path = require("path");
+const fs =require("fs/promises");
 const jwt = require("jsonwebtoken");
 const {
     HttpError,
     ctrlWrapper } = require("../helpers");
 const { User } = require("../models/user");
 const { SECRET_KEY } = process.env;
+const avatarsDir= path.join(__dirname, "../", "public","avatars");
 
 const register = async (req, res) => {
     const { email, password } = req.body;
@@ -15,7 +19,9 @@ const register = async (req, res) => {
     }
     // Хешуємо пароль і додаємо в базу користувача
     const hashPassword = await bcrypt.hash(password, 10)
-    const newUser = await User.create({ ...req.body, password: hashPassword });
+    // Cтворюємо тимчасову аватар
+    const avatarURL = gravatar.url(email);
+    const newUser = await User.create({ ...req.body, password: hashPassword,avatarURL });
     // Виводимо статус 201 
     res.status(201).json({
         email: newUser.email,
@@ -73,11 +79,31 @@ const updateSubscription = async (req, res) => {
         throw HttpError(404, "Not found")
     };
     res.status(200).json(result);
+};
+
+const updateAvatar= async(req,res)=>{
+    const{_id}=req.user;
+// Знаходимо де знаходиться файл (path:tempUpload) та його назву (originalname)
+const{path:tempUpload, originalname}=req.file;
+// Робимо унікальну назву аватарки за допомогою _id
+const filename =`${_id}_${originalname}`;
+// Створюємо новий шлях до файлу
+const resultUpload = path.join(avatarsDir,filename);
+// Змінюємо старий шлях на новий
+await fs.rename(tempUpload,resultUpload);
+// Шлях де лишається файл
+const avatarURL = path.join("avatars",filename);
+// Перезаписуємо на user avatarURL
+await User.findByIdAndUpdate(_id,{avatarURL});
+res.json({avatarURL})
+
 }
+
 module.exports = {
     register: ctrlWrapper(register),
     login: ctrlWrapper(login),
     getCurrent: ctrlWrapper(getCurrent),
     logout: ctrlWrapper(logout),
-    updateSubscription: ctrlWrapper(updateSubscription)
+    updateSubscription: ctrlWrapper(updateSubscription),
+    updateAvatar: ctrlWrapper(updateAvatar)
 };

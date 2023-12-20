@@ -15,6 +15,8 @@ app.use(logger(formatsLogger));
 // Мідлваре для обмеження доступу на сайт( передається список адрес)
 app.use(cors());
 app.use(express.json());
+// Middleware звідки брати файли коли прийде запит
+app.use(express.static("public"));
 
 // Обробка запитів на api за допомогою маршрутів
 app.use("/api/users", authRouter);
