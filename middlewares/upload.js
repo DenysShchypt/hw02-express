@@ -7,7 +7,7 @@ const tempDr = path.join(__dirname, "../", "temp");
 // Object налаштувань
 const multerConfig = multer.diskStorage({
     destination: tempDr,
-// Необов'язкова властивість для перейменування файлу
+    // Необов'язкова властивість для перейменування файлу
     filename: (req, file, cb) => {
         cb(null, file.originalname)
     }

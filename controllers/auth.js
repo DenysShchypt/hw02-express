@@ -1,14 +1,15 @@
 const bcrypt = require("bcrypt");
-const gravatar=require("gravatar");
+const gravatar = require("gravatar");
 const path = require("path");
-const fs =require("fs/promises");
+const Jimp = require("jimp");
+const fs = require("fs/promises");
 const jwt = require("jsonwebtoken");
 const {
     HttpError,
     ctrlWrapper } = require("../helpers");
 const { User } = require("../models/user");
 const { SECRET_KEY } = process.env;
-const avatarsDir= path.join(__dirname, "../", "public","avatars");
+const avatarsDir = path.join(__dirname, "../", "public", "avatars");
 
 const register = async (req, res) => {
     const { email, password } = req.body;
@@ -21,7 +22,7 @@ const register = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10)
     // Cтворюємо тимчасову аватар
     const avatarURL = gravatar.url(email);
-    const newUser = await User.create({ ...req.body, password: hashPassword,avatarURL });
+    const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL });
     // Виводимо статус 201 
     res.status(201).json({
         email: newUser.email,
@@ -48,8 +49,6 @@ const login = async (req, res) => {
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "20h" });
     // Записуємо token в базу
     await User.findByIdAndUpdate(user._id, { token });
-console.log(res.statusCode);
-
     res.status(200).json({
         token: token, user: {
             email: user.email,
@@ -82,23 +81,31 @@ const updateSubscription = async (req, res) => {
     res.status(200).json(result);
 };
 
-const updateAvatar= async(req,res)=>{
-    const{_id}=req.user;
-// Знаходимо де знаходиться файл (path:tempUpload) та його назву (originalname)
-const{path:tempUpload, originalname}=req.file;
-// Робимо унікальну назву аватарки за допомогою _id
-const filename =`${_id}_${originalname}`;
-// Створюємо новий шлях до файлу
-const resultUpload = path.join(avatarsDir,filename);
-// Змінюємо старий шлях на новий
-await fs.rename(tempUpload,resultUpload);
-// Шлях де лишається файл
-const avatarURL = path.join("avatars",filename);
-// Перезаписуємо на user avatarURL
-await User.findByIdAndUpdate(_id,{avatarURL});
-res.json({avatarURL})
+const updateAvatar = async (req, res) => {
+    const { _id } = req.user;
+    // Знаходимо де знаходиться файл (path:tempUpload) та його назву (originalname)
+    const { path: tempUpload, originalname } = req.file;
+    // Робимо унікальну назву аватарки за допомогою _id
+    const filename = `${_id}_${originalname}`;
+    // Створюємо новий шлях до файлу
+    const resultUpload = path.join(avatarsDir, filename)
+    // Оброби аватарку пакетом jimp і постав для неї розміри 250 на 250
+    Jimp.read(tempUpload).then(image => {
+        return image.autocrop()
+            .resize(250, 250)
+            .write(resultUpload)
+    }).catch(err => {
+        console.log(err.message);
+    });
+    // Змінюємо старий шлях на новий
+    await fs.rename(tempUpload, resultUpload);
+    // Шлях де лишається файл
+    const avatarURL = path.join("avatars", filename);
+    // Перезаписуємо на user avatarURL
+    await User.findByIdAndUpdate(_id, { avatarURL });
+    res.json({ avatarURL })
 
-}
+};
 
 module.exports = {
     register: ctrlWrapper(register),

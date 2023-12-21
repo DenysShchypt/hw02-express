@@ -1,5 +1,5 @@
 const express = require('express');
-const { validateBody, authenticate,upload } = require("../../middlewares");
+const { validateBody, authenticate, upload } = require("../../middlewares");
 const schema = require('../../models/user');
 const router = express.Router();
 const ctrl = require("../../controllers/auth")
@@ -13,10 +13,10 @@ router.get("/current", authenticate, ctrl.getCurrent);
 // Logout user
 router.post("/logout", authenticate, ctrl.logout);
 // subscription
-router.patch("/", authenticate,validateBody(schema.updatePatchSchemaSubscription), ctrl.updateSubscription);
+router.patch("/", authenticate, validateBody(schema.updatePatchSchemaSubscription), ctrl.updateSubscription);
 // upload.single("") це коли очикується один файл
 // upload.array("",10) це коли очікується більше одного файлу
 // upload.fields([{name:"a",maxCount:5},{name:"b",maxCount:10}]) це коли очікується декілька файлів з різних полів
-router.patch("/avatars",authenticate,upload.single("avatar"), ctrl.updateAvatar);
+router.patch("/avatars", authenticate, upload.single("avatar"), ctrl.updateAvatar);
 
 module.exports = router;
