@@ -17,7 +17,6 @@ const getAll = async (req, res) => {
     // додаткові налаштування пошуку skip(скільки пропустити об'єктів с початку бази), limit(скільки повернути об'єктів)
     { skip, limit}
   )
-  // .where({ skip, limit,favorite })
     // інструмент пошуку для поширювання запиту
     .populate("owner", "email");
   res.json(result);
