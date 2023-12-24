@@ -6,6 +6,10 @@ const ctrl = require("../../controllers/auth")
 
 // signup
 router.post("/register", validateBody(schema.registerLoginSchema), ctrl.register);
+// Верифікація користувача
+router.get("/verify/:verificationToken", ctrl.verifyEmail);
+// Додавання повторної відправки email користувачу з посиланням для верифікації
+router.post("/verify", validateBody(schema.emailSchema), ctrl.resendVerifyEmail);
 // signin
 router.post("/login", validateBody(schema.registerLoginSchema), ctrl.login);
 // Поточний user

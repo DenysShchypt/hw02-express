@@ -3,6 +3,7 @@ const Joi = require("joi");
 const { handleMongooseError } = require("../helpers");
 const versionSubscription = ["starter", "pro", "business"];
 const emailRegexp = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
+
 // Схема аутентифікації в базі
 const userSchema = new Schema({
   password: {
@@ -47,6 +48,11 @@ const registerLoginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
 });
 
+// Схема для підтвердження email
+const emailSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+});
+
 // Схема обробки PATCH запиту Subscription
 const updatePatchSchemaSubscription = Joi.object({
   subscription: Joi.array().valid(...versionSubscription).required()
@@ -56,5 +62,5 @@ const updatePatchSchemaSubscription = Joi.object({
 const User = model("user", userSchema);
 
 module.exports = {
-  User, registerLoginSchema, updatePatchSchemaSubscription
-}
+  User, registerLoginSchema, updatePatchSchemaSubscription, emailSchema
+};
