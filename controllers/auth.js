@@ -3,12 +3,13 @@ const gravatar = require("gravatar");
 const path = require("path");
 const Jimp = require("jimp");
 const fs = require("fs/promises");
+const {v4: uuidv4}=require("uuid");
 const jwt = require("jsonwebtoken");
 const {
     HttpError,
-    ctrlWrapper } = require("../helpers");
+    ctrlWrapper,sendEmail } = require("../helpers");
 const { User } = require("../models/user");
-const { SECRET_KEY } = process.env;
+const { SECRET_KEY,BASE_URL } = process.env;
 const avatarsDir = path.join(__dirname, "../", "public", "avatars");
 
 const register = async (req, res) => {
@@ -22,7 +23,17 @@ const register = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10)
     // Cтворюємо тимчасову аватар
     const avatarURL = gravatar.url(email);
-    const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL });
+    const verificationToken = uuidv4();
+    const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL, verificationToken});
+const verifyEmail={
+    to:email,
+    subject:"Verify email",
+    html:`<a target="_blank" href="${BASE_URL}/api/auth/verify/${verificationToken}">Click verify email</a>`
+}
+
+await sendEmail(verifyEmail)
+
+
     // Виводимо статус 201 
     res.status(201).json({
         email: newUser.email,
