@@ -28,8 +28,8 @@ describe("login test", () => {
 
     it("login test", async () => {
         const checkLogin = {
-            "password": "denys1@mail.com",
-            "email": "denys1@mail.com",
+            "password": "denysshchyptsovit@gmail.com",
+            "email": "denysshchyptsovit@gmail.com",
         }
         const response = await request(app).post("/api/users/login").send(checkLogin);
         // Use .toBe to compare primitive values or to check referential identity of object instances. It calls Object.is to compare values, which is even better for testing than === strict equality operator.
