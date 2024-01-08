@@ -4,6 +4,7 @@ const {
 const { Contact } = require('../models/contact');
 
 const getAll = async (req, res) => {
+
   // id user який робить запит
   const { _id: owner } = req.user;
   // Значення пагінації
