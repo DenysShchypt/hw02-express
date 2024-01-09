@@ -1,12 +1,14 @@
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
+const swaggerUI=require("swagger-ui-express");
 
 // Додавання данних з env змінні оточення process.env
 require("dotenv").config();
 // Додавання маршрутів
 const contactsRouter = require('./routes/api/contacts');
-const authRouter = require("./routes/api/users")
+const authRouter = require("./routes/api/users");
+const swaggerDocument = require("./swagger/contacts.json")
 
 const app = express();
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
@@ -20,7 +22,7 @@ app.use(express.static("public"));
 
 // Обробка запитів на api за допомогою маршрутів
 app.use("/api/users", authRouter);
-app.use('/api/contacts', contactsRouter);
+app.use('/api/contacts',swaggerUI.serve,swaggerUI.setup(swaggerDocument), contactsRouter);
 
 
 app.use((req, res) => {

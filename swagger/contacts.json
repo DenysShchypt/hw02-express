@@ -1,0 +1,333 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "My favorite contacts",
+    "description": "My API DENYS SHCHYPTSOV",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/DENYSSHCHYPTSOVIT/contacts/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "http://localhost:3000/api/",
+      "description": "Contacts server description"
+    }
+  ],
+  "paths": {
+    "/contacts": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Returns a list of contacts and add new contact.",
+        "operationId": "getAll",
+        "responses": {
+          "200": {
+            "description": "A JSON array of contacts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contacts"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Everything is non-standard",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "creat new contact",
+        "operationId": "addContact",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contact"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Everything is non-standard",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/{_id}": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Returns a list of contacts and add new contact.",
+        "operationId": "getById",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "id contact",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "6580a8c81f10533f6530c5a6"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contacts"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Everything is non-standard",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Update contact",
+        "operationId": "updateContact",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "id contact",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "6580a8c81f10533f6530c5a6"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Everything is non-standard",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Delete contact",
+        "operationId": "removeContact",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "id contact",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "6580a8c81f10533f6530c5a6"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success remove",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "default": {
+            "description": "Everything is non-standard",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Update ravorite contact",
+        "operationId": "updateFavorite",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "id contact",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "6580a8c81f10533f6530c5a6"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success update Favorite",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Favorite"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Everything is non-standard",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Contact": {
+        "required": [
+          "email",
+          "favorite",
+          "name",
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "favorite": {
+            "type": "boolean"
+          },
+          "owner": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "2023-12-18T20:17:12.878+00:00"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "2023-12-18T20:17:12.878+00:00"
+          }
+        }
+      },
+      "Contacts": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Contact"
+        }
+      },
+      "Error": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Favorite": {
+        "required": [
+          "favorite"
+        ],
+        "type": "boolean",
+        "properties": {
+          "favorite": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
