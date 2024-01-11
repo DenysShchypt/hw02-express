@@ -8,7 +8,7 @@ require("dotenv").config();
 // Додавання маршрутів
 const contactsRouter = require('./routes/api/contacts');
 const authRouter = require("./routes/api/users");
-const swaggerDocument = require("./swagger/contacts.json")
+const swaggerDocument = require("./swagger/api.json")
 
 const app = express();
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
