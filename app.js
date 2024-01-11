@@ -22,7 +22,8 @@ app.use(express.static("public"));
 
 // Обробка запитів на api за допомогою маршрутів
 app.use("/api/users", authRouter);
-app.use('/api/contacts',swaggerUI.serve,swaggerUI.setup(swaggerDocument), contactsRouter);
+app.use('/api/contacts',contactsRouter);
+app.use('/api/',swaggerUI.serve,swaggerUI.setup(swaggerDocument));
 
 
 app.use((req, res) => {
