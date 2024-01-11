@@ -19,6 +19,21 @@
         ],
         "summary": "Returns a list of contacts and add new contact.",
         "operationId": "getAll",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "A JSON array of contacts",
@@ -48,11 +63,26 @@
         ],
         "summary": "creat new contact",
         "operationId": "addContact",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Contact"
+                "$ref": "#/components/schemas/ContactAdd"
               }
             }
           },
@@ -91,6 +121,19 @@
         "operationId": "getById",
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          },
+          {
             "name": "_id",
             "in": "path",
             "description": "id contact",
@@ -99,6 +142,7 @@
             "explode": false,
             "schema": {
               "type": "string",
+              "format": "_id",
               "example": "6580a8c81f10533f6530c5a6"
             }
           }
@@ -134,6 +178,19 @@
         "operationId": "updateContact",
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          },
+          {
             "name": "_id",
             "in": "path",
             "description": "id contact",
@@ -142,6 +199,7 @@
             "explode": false,
             "schema": {
               "type": "string",
+              "format": "_id",
               "example": "6580a8c81f10533f6530c5a6"
             }
           }
@@ -177,6 +235,19 @@
         "operationId": "removeContact",
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          },
+          {
             "name": "_id",
             "in": "path",
             "description": "id contact",
@@ -185,6 +256,7 @@
             "explode": false,
             "schema": {
               "type": "string",
+              "format": "_id",
               "example": "6580a8c81f10533f6530c5a6"
             }
           }
@@ -216,6 +288,19 @@
         "operationId": "updateFavorite",
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          },
+          {
             "name": "_id",
             "in": "path",
             "description": "id contact",
@@ -224,10 +309,21 @@
             "explode": false,
             "schema": {
               "type": "string",
+              "format": "_id",
               "example": "6580a8c81f10533f6530c5a6"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactUpdateFavorite"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Success update Favorite",
@@ -251,10 +347,369 @@
           }
         }
       }
+    },
+    "/users/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add new user.",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegistration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "A JSON information about user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserRegistrationRes"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Everything is non-standard",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login user.",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegistration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A JSON information about token and user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserLoginRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/logout": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "logout user.",
+        "operationId": "logout",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/current": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Current user.",
+        "operationId": "getCurrent",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON information about current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update subscription user.",
+        "operationId": "updateSubscription",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateSubscriptionUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A JSON information about update subscription",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/updateSubscriptionUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/avatars": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update avatar user.",
+        "operationId": "updateAvatar",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "is required",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/users_avatars_body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A JSON information about update subscription",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/updateSubscriptionUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "ContactAdd": {
+        "required": [
+          "email",
+          "favorite",
+          "name",
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "favorite": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ContactUpdateFavorite": {
+        "required": [
+          "favorite"
+        ],
+        "type": "object",
+        "properties": {
+          "favorite": {
+            "type": "boolean"
+          }
+        }
+      },
       "Contact": {
         "required": [
           "email",
@@ -271,7 +726,8 @@
             "type": "string"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "format": "email"
           },
           "phone": {
             "type": "string"
@@ -317,10 +773,106 @@
         "required": [
           "favorite"
         ],
-        "type": "boolean",
+        "type": "object",
         "properties": {
           "favorite": {
             "type": "boolean"
+          }
+        }
+      },
+      "UserRegistrationRes": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "subscription": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "2023-12-18T20:17:12.878+00:00"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "2023-12-18T20:17:12.878+00:00"
+          }
+        }
+      },
+      "UserRegistration": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "maxLength": 15,
+            "minLength": 5,
+            "type": "string"
+          }
+        }
+      },
+      "UserLoginRes": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserLoginRes_user"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "subscription": {
+            "type": "string"
+          }
+        }
+      },
+      "updateSubscriptionUser": {
+        "type": "object",
+        "properties": {
+          "subscription": {
+            "type": "string",
+            "enum": [
+              "starter",
+              "pro",
+              "business"
+            ]
+          }
+        }
+      },
+      "users_avatars_body": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          }
+        }
+      },
+      "UserLoginRes_user": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "subscription": {
+            "type": "string"
           }
         }
       }
